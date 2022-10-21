@@ -16,7 +16,6 @@ import java.util.Objects;
 @RequestMapping("products")
 public class ProductController {
 
-
     private ProductService productService;
 
     @Autowired

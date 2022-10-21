@@ -1,5 +1,6 @@
 package com.digipay.inventory.model.product;
 
+import com.digipay.inventory.annotation.Creator;
 import com.digipay.inventory.model.BaseEntity;
 
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ public class Product extends BaseEntity {
     private Long price;
     private Float weight;
     private Long category;
+    @Creator("ali")
+    private String creator;
 
     public Product() {
     }
@@ -72,5 +75,13 @@ public class Product extends BaseEntity {
 
     public void setCategory(Long category) {
         this.category = category;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }
