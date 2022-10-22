@@ -1,13 +1,15 @@
 package com.digipay.inventory.model.product;
 
-import com.digipay.inventory.annotation.Creator;
+
 import com.digipay.inventory.model.BaseEntity;
+import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
 
 @Entity
 public class Product extends BaseEntity {
 
+    @NotNull
     private String name;
     private String code;
     private String wareHouseCode;
@@ -77,11 +79,11 @@ public class Product extends BaseEntity {
         this.category = category;
     }
 
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
+//    public String getCreator() {
+//        return creator;
+//    }
+//
+//    public void setCreator(String creator) {
+//        this.creator = creator;
+//    }
 }
