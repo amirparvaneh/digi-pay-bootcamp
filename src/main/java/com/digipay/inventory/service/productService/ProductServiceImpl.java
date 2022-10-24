@@ -28,7 +28,7 @@ public class ProductServiceImpl extends MajorService implements ProductService {
 
     }
 
-    Qualifier
+//    Qualifier
 
 //
 //    @Transactional

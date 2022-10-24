@@ -3,7 +3,6 @@ package com.digipay.inventory.controller;
 import com.digipay.inventory.dto.ProductDto;
 import com.digipay.inventory.exception.BusinessException;
 import com.digipay.inventory.exception.ValidationException;
-import com.digipay.inventory.service.productService.ProductService;
 import com.digipay.inventory.service.productService.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
