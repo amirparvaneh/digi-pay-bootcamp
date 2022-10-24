@@ -20,8 +20,9 @@ public class ProductServiceImpl extends MajorService implements ProductService {
     private CheckingImpl checking;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,CheckingImpl checking) {
         this.productRepository = productRepository;
+        this.checking = checking;
     }
 
     @Override

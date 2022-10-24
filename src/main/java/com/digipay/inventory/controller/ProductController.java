@@ -6,7 +6,6 @@ import com.digipay.inventory.exception.ValidationException;
 import com.digipay.inventory.model.product.Product;
 import com.digipay.inventory.service.productService.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,30 +29,20 @@ public class ProductController {
     }
 
 
-    //crud operation ----------
-    //create
-
-    @PostMapping("/{product}")
-    private ProductDto saveNewProduct(@RequestBody ProductDto productDto) throws BusinessException {
-        if (Objects.nonNull(productDto)) {
-            throw new ValidationException();
+    @PostMapping()
+    private String saveNewProduct(@RequestBody Product product) throws BusinessException {
+        try {
+            if (Objects.isNull(product)) {
+                throw new ValidationException();
+            }
+            productService.register(product);
+            return addMessage;
+        } catch (RuntimeException e) {
+            throw new BusinessException(e.getCause());
         }
-        productService.register(productDto);
-        return productDto;
     }
 
-
-//    @Transactional
-//    @PostMapping("/{product}")
-//    String addNewProduct(@PathVariable Product product) {
-//        productService.save(product);
-//        logger.info(addMessage);
-//        return addMessage;
-//    }
-
-
-    //read
-    @GetMapping("")
+    @GetMapping()
     private List<Product> getAllProduct() throws BusinessException {
         try {
             return productService.findAllProduct();
@@ -72,9 +61,6 @@ public class ProductController {
         }
     }
 
-
-    //update
-
     @PutMapping("/{product}")
     private String updateProduct(@RequestBody Product product) throws BusinessException {
         try {
@@ -85,7 +71,6 @@ public class ProductController {
         }
     }
 
-    //delete
     @DeleteMapping("/{id}")
     private String deleteProductById(@RequestBody Long productId) throws BusinessException {
         try {
