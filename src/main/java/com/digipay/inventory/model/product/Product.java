@@ -2,6 +2,7 @@ package com.digipay.inventory.model.product;
 
 
 import com.digipay.inventory.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
@@ -10,12 +11,19 @@ import javax.persistence.Entity;
 public class Product extends BaseEntity {
 
     @NotNull
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("code")
     private String code;
+    @JsonProperty("wareHouseCode")
     private String wareHouseCode;
+    @JsonProperty("wareHouseId")
     private Long wareHouseId;
+    @JsonProperty("price")
     private Long price;
+    @JsonProperty("weight")
     private Float weight;
+    @JsonProperty("category")
     private Long category;
     @Creator("ali")
     private String creator;
@@ -79,11 +87,4 @@ public class Product extends BaseEntity {
         this.category = category;
     }
 
-//    public String getCreator() {
-//        return creator;
-//    }
-//
-//    public void setCreator(String creator) {
-//        this.creator = creator;
-//    }
 }

@@ -6,9 +6,10 @@ import com.digipay.inventory.model.product.Product;
 import com.digipay.inventory.repository.ProductRepository;
 import com.digipay.inventory.service.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -25,8 +26,28 @@ public class ProductServiceImpl extends MajorService implements ProductService {
 
     @Override
     public void save(Product product) {
-
+        checking.checkQuality();
+        checking.checkPosition();
+        productRepository.save(product);
     }
+
+    @Override
+    public List<Product> findAllProduct() {
+        List<Product> products = new ArrayList<>();
+        products = productRepository.findAll();
+        return products;
+    }
+
+    @Override
+    public Product findByName(String name) {
+        return productRepository.findProductByName(name);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
+    }
+
 
 //    Qualifier
 
