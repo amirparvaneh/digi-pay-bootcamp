@@ -1,7 +1,6 @@
 package com.digipay.inventory.service.productService;
 
 import com.digipay.inventory.checking.CheckingImpl;
-import com.digipay.inventory.dto.ProductDto;
 import com.digipay.inventory.model.product.Product;
 import com.digipay.inventory.repository.ProductRepository;
 import com.digipay.inventory.service.MajorService;

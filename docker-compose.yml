@@ -1,21 +1,27 @@
-version: "3.7"
+version: '3'
+
 services:
-  api_service:
-    build: src/main/resources/docker
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - mysql_db
-    links:
-      - mysql_db:app_db
-  mysql_db:
-    image: "mysql"
-    restart: always
+
+  myapp-mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=MyAppDb
+      - MYSQL_USER=myapp-user
+      - MYSQL_PASSWORD=password
     ports:
       - 3306:3306
+
+  inventory:
+    image: myapp-image-name-that-appears-when-you-run-docker-images
+    restart: on-failure
+    depends_on:
+      - myapp-mysql
+    ports:
+      - 8080:8080
     environment:
-      MYSQL_DATABASE: java_to_dev_app_db
-      MYSQL_USER: java_to_dev
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: 0011
+      - DATABASE_HOST=myapp-mysql
+      - DATABASE_USER=myapp-user
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=MyAppDb
+      - DATABASE_PORT=3306

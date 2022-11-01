@@ -4,9 +4,11 @@ import com.digipay.inventory.model.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "external")
 public class External extends BaseEntity {
 
     @JsonProperty("name")

@@ -29,7 +29,7 @@ public class ProductController {
     }
 
 
-    @PostMapping()
+    @PostMapping
     private String saveNewProduct(@RequestBody Product product) throws BusinessException {
         try {
             if (Objects.isNull(product)) {
@@ -42,18 +42,18 @@ public class ProductController {
         }
     }
 
-    @GetMapping()
-    private List<Product> getAllProduct() throws BusinessException {
+    @GetMapping
+    private List<Product> getAllProduct() throws Exception {
         try {
             return productService.findAllProduct();
         } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
     }
 
     @GetMapping("/{productName}")
-    private Product getProductByName(@RequestBody String name) throws BusinessException {
+    private Product getProductByName(@PathVariable String name) throws BusinessException {
         try {
             return productService.findByName(name);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/{product}")
+    @PutMapping("/update/product")
     private String updateProduct(@RequestBody Product product) throws BusinessException {
         try {
             productService.save(product);
@@ -72,7 +72,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    private String deleteProductById(@RequestBody Long productId) throws BusinessException {
+    private String deleteProductById(@PathVariable Long productId) throws BusinessException {
         try {
             productService.deleteById(productId);
             logger.info(deleteMessage);
