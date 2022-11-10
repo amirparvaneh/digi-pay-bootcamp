@@ -6,7 +6,7 @@ public class BusinessException extends Exception {
     }
 
     public BusinessException(String message) {
-        super(message);
+        super("خطا");
     }
 
     public BusinessException(String message, Throwable cause) {

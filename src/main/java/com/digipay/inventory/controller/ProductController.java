@@ -5,18 +5,19 @@ import com.digipay.inventory.exception.BusinessException;
 import com.digipay.inventory.exception.ValidationException;
 import com.digipay.inventory.model.product.Product;
 import com.digipay.inventory.service.productService.ProductServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/categories/products")
 public class ProductController {
 
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger(ProductController.class);
     private final static String deleteMessage = "successful deleted";
     private final static String updatedMessage = "successful updated";
     private final static String addMessage = "successful saved";
@@ -53,7 +54,8 @@ public class ProductController {
     }
 
     @GetMapping("/{productName}")
-    private Product getProductByName(@PathVariable String name) throws BusinessException {
+    @ResponseBody
+    private Product getProductByName(@PathVariable("productName") String name) throws BusinessException {
         try {
             return productService.findByName(name);
         } catch (Exception e) {
@@ -72,15 +74,17 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    private String deleteProductById(@PathVariable Long productId) throws BusinessException {
+    private String deleteProductById(@PathVariable("id") Long productId) throws Exception {
+        Boolean result ;
         try {
-            productService.deleteById(productId);
-            logger.info(deleteMessage);
-            return updatedMessage;
-        } catch (Exception e) {
-            throw new BusinessException(e.getCause());
+            result =  productService.deleteById(productId);
+            logger.info(String.valueOf(result));
+            if (result){
+                return deleteMessage;
+            }else
+                return "nothing to delete";
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getCause());
         }
-
     }
-
 }

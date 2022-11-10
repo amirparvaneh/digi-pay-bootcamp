@@ -9,5 +9,5 @@ import java.util.List;
 public interface ProductService {
     List<Product> findAllProduct();
     Product findByName(String name);
-    void deleteById(Long id);
+    Boolean deleteById(Long id) throws Exception;
 }
