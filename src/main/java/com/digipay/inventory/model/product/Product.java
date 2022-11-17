@@ -27,8 +27,6 @@ public class Product extends BaseEntity {
     private Float weight;
     @JsonProperty("category")
     private Long category;
-    @Creator("ali")
-    private String creator;
 
     public Product() {
     }

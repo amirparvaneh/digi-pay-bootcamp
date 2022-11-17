@@ -3,11 +3,13 @@ package com.digipay.inventory.service.categoryService;
 import com.digipay.inventory.model.category.Category;
 import com.digipay.inventory.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
 
@@ -40,6 +42,8 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> findAll() {
-        return null;
+        List<Category> categories = new ArrayList<>();
+        categories = categoryRepository.findAll();
+        return categories;
     }
 }
