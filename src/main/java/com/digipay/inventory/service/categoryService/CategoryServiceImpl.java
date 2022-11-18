@@ -1,6 +1,5 @@
 package com.digipay.inventory.service.categoryService;
 
-import com.digipay.inventory.exception.BusinessException;
 import com.digipay.inventory.model.category.Category;
 import com.digipay.inventory.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,19 +31,18 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void update(Category category) {
-        categoryRepository.save(category);
+    public Optional<Category> update(Long id, Category category) {
+        Optional<Category> updatedCategory = Optional.ofNullable(find(id));
+        updatedCategory.get().setName(category.getName());
+        updatedCategory.get().setParentId(category.getParentId());
+        return updatedCategory;
     }
 
     @Override
-    public Optional<Category> find(Long id) throws BusinessException {
-        Optional<Category> result = Optional.of(new Category());
-        try{
-           result = categoryRepository.findById(id);
-           return result;
-        }catch (Exception e){
-            throw new BusinessException(e.getMessage());
-        }
+    public Category find(Long id) {
+        Category result = new Category();
+        result = categoryRepository.findCategoryById(id);
+        return result;
     }
 
     @Override

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/category")
@@ -33,14 +34,14 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseBody
-    private Category getCategoryById(@PathVariable Long id){
+    private Category getCategoryById(@PathVariable("id") Long id){
         return categoryService.find(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    private String deleteCategory(@PathVariable Long id) {
+    @DeleteMapping(value = "/delete/{id}")
+    private String deleteCategory(@PathVariable("id") Long id) {
         try {
             categoryService.deleteById(id);
             return deleteMessage;
@@ -49,14 +50,9 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/update/{category}")
+    @PutMapping(value = "/update/{id}")
     @ResponseBody
-    private Category updateCategory(@PathVariable Category category) {
-        try {
-            categoryService.update(category);
-            return category;
-        } catch (Exception e) {
-            throw new HibernateException(e.getMessage());
-        }
+    private Optional<Category> updateCategory(@PathVariable("id") Long id, @RequestBody Category category) {
+        return categoryService.update(id,category);
     }
 }

@@ -11,9 +11,9 @@ public interface BaseService<T> {
 
     void delete(T t);
 
-    void update(T t);
+    Optional<T> update(Long id,T t);
 
-    Optional<T> find(Long id) throws BusinessException;
+    Category find(Long id) throws BusinessException;
 
     List<T> findAll();
 
