@@ -3,6 +3,7 @@ package com.digipay.inventory.controller;
 
 import com.digipay.inventory.model.category.Category;
 import com.digipay.inventory.service.categoryService.CategoryServiceImpl;
+import com.sun.jdi.LongValue;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/category")
+@RestController(value = "/category")
 public class CategoryController {
 
     private CategoryServiceImpl categoryService;
@@ -34,13 +34,14 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
-    private Category getCategoryById(@PathVariable("id") Long id){
+    private Category getCategoryById(@PathVariable("id") String inputId) {
+        Long id = Long.parseLong(inputId);
         return categoryService.find(id);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     private String deleteCategory(@PathVariable("id") Long id) {
         try {
             categoryService.deleteById(id);
@@ -50,9 +51,9 @@ public class CategoryController {
         }
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
-    private Optional<Category> updateCategory(@PathVariable("id") Long id, @RequestBody Category category) {
-        return categoryService.update(id,category);
+    private Optional<Category> updateCategory(@PathVariable("id") long id, @RequestBody Category category) {
+        return categoryService.update(id, category);
     }
 }

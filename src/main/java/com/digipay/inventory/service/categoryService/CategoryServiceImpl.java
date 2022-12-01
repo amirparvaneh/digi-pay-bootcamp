@@ -15,7 +15,6 @@ public class CategoryServiceImpl implements CategoryService{
 
     private CategoryRepository categoryRepository;
 
-    @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
     }

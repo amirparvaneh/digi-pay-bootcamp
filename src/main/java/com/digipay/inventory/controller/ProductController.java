@@ -53,7 +53,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/{productName}")
+    @GetMapping("{productName}")
     @ResponseBody
     private Product getProductByName(@PathVariable("productName") String name) throws BusinessException {
         try {
@@ -63,7 +63,7 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/update/product")
+    @PutMapping()
     private String updateProduct(@RequestBody Product product) throws BusinessException {
         try {
             productService.save(product);
@@ -73,7 +73,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     private String deleteProductById(@PathVariable("id") Long productId) throws Exception {
         Boolean result ;
         try {
